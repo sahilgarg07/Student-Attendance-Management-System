@@ -1,1 +1,2 @@
-Backend Folder for Django Files
+# AttendanceAppServer
+ Django Server For Application 
