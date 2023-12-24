@@ -1,1 +1,2 @@
- Backend files for the django server
+# AttendanceAppServer
+ Django Server For Application 
