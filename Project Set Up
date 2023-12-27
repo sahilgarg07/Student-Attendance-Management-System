@@ -1,9 +1,0 @@
-Setting Up the Project
-
--- Install Django
--- Install React
-
--- Install cmake,dlib, face_recognition using pip
-
--- Install corsheaders and other missing libraries (if getting utils.six error try updating Django and then try again)
-
