@@ -1,0 +1,40 @@
+/* Assuming you have a basic CSS file for your React components */
+
+/* Styling for the video container to take the whole page */
+.video-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px; /* Rounded corners */
+    overflow: hidden; /* Hide any content that overflows the container */
+    border: 2px solid #ccc; /* Add a border with the desired color */
+    margin: 20px; /* Add margin to create space around the container */
+    margin-top: 40px;
+  }
+  
+  /* Styling for the video element */
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Make sure the video fills the container while preserving its aspect ratio */
+  }
+  
+  /* Styling for the button */
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff; /* You can use your desired color here */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Optional: Add hover effect for the button */
+  button:hover {
+    background-color: #0056b3; /* You can adjust the color here */
+  }
+  
