@@ -9,37 +9,38 @@ import Signup from './components/Signup';
 import EditProfile from './components/EditProfile';
 import { useSelector } from 'react-redux';
 import DashBoard from './components/Dashboard';
-import { useVerifyUser } from './hooks/useVerifyUser';
-import { useEffect } from 'react';
+import { useAuthPersist } from './hooks/useAuthPersist';
+import { useEffect, useState } from 'react';
 import CourseSession from './components/CourseSession';
 import EnrolledSession from './components/EnrolledSession';
 import MarkAttendance from './components/MarkAttendance';
 import StudentsInSession from './components/StudentsInSession';
 
 function App() {
-  const user = useSelector((state) => {
-    return state.users.user;
-  });
-  const person = useSelector((state) => {
-    return state.persons.person;
-  });
-
-  const { verifystate, isVerifying } = useVerifyUser();
+  const user = useSelector((state) => state.users.user);
+  const person = useSelector((state) => state.persons.person);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  const checkAuth = useAuthPersist();
 
   useEffect(() => {
-    verifystate();
-  }, []);
+    const initAuth = async () => {
+      await checkAuth();
+      setIsLoading(false);
+    };
+    initAuth();
+  }, [checkAuth]);
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Or a more sophisticated loading component
+  }
 
   return (
     <div className="App">
       <BrowserRouter>
-        {/* Navbar */}
-        {/*<DashBoard />*/}
         <Navbar />
         <Carousel/>
 
-
-        {/* Body Content */}
         <div className="BodyContent">
           <Routes>
             <Route path="/" element={!person ? <Home /> : person.role ? <DashBoard /> : <EditProfile />} />

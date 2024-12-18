@@ -6,29 +6,38 @@ import { useState } from 'react';
 export const useVerifyUser = () => {
     const [isVerifying, setIsVerifying] = useState(true);
     const dispatch = useDispatch();
+
     const verifystate = async () => {
         setIsVerifying(true);
-        let local = JSON.parse(localStorage.getItem('user'));
-        // console.log(local.email,local.token);
+        let local = localStorage.getItem('user');
+        
         if (local) {
+            local = JSON.parse(local);
 
-            const response = await fetch('/api/data/findperson', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${local.email} ${local.token}`
-                },
-                body: JSON.stringify({email: local.email})
-            })
-            const json = await response.json();
-            // console.log(json);
-            if (response.ok) {
+            try {
+                const response = await fetch('/api/data/findperson', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${local.token}` // Adjusted here for the token
+                    },
+                    body: JSON.stringify({ email: local.email })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const json = await response.json();
                 dispatch(userLogin(local));
                 dispatch(personLogin(json));
+            } catch (error) {
+                console.error('Fetch error:', error);
             }
         }
-        
+
         setIsVerifying(false); 
     }
+
     return { verifystate, isVerifying };
 }

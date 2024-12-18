@@ -165,7 +165,7 @@ const EnrolledSession = () => {
         console.log(name_of_course);
         // Close the pop-up after processing the input
         // setShowPopup(false);
-        if(isWithinRadius(parseFloat(lat),parseFloat(lon),parseFloat(lat_of_session),parseFloat(lon_of_session),parseFloat(10))){
+        if(isWithinRadius(parseFloat(lat),parseFloat(lon),parseFloat(lat_of_session),parseFloat(lon_of_session),parseFloat(1000))){
             navigate('/markAttendance',{state: {name_of_course,username_of_person,date_of_session,lat_of_session,lon_of_session,start_time_of_session,end_time_of_session}});
         }else{
             alert("You are not in the vicinity to mark the attendance.");
